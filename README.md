@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://vpetteri.users.cs.helsinki.fi)
+* [Linkki sovellukseeni](https://vpetteri.users.cs.helsinki.fi/tsoha)
 * [Linkki dokumentaatiooni](https://www.github.com/PetuV/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
