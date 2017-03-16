@@ -1,10 +1,10 @@
-# Tietokantasovelluksen esittelysivu
+# Pelikirjasto
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](https://vpetteri.users.cs.helsinki.fi)
+* [Linkki dokumentaatiooni](https://www.github.com/PetuV/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Käyttäjä voi lisätä kirjastoonsa pelejä ja merkitä, mitkä niistä hän on jo läpäissyt ja mitkä ovat vielä kesken. Lisäksi hän voi antaa pelille arvosanan. Myös muiden käyttäjien kirjastoja pääsee tarkkailemaan.
