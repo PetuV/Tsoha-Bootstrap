@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muukalaismarssi</h1>
+  <h1>{{game.name}}</h1>
   <ul>
-    <li>Kehittäjä: Pehmoneliö</li>
-    <li>Lajityyppi: Roolipeli</li>
-    <li>Julkaisupäivä: 09.09.09</li>
+    <li>Kehittäjä: {{game.dev}}</li>
+    <li>Lajityyppi: {{game.genre}}</li>
+    <li>Julkaisupäivä: {{game.released}}</li>
     <li>Arvosana: 
     <select name="rating">
 	    <option value="1">1</option>

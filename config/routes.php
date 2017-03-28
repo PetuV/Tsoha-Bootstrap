@@ -4,12 +4,20 @@
     HelloWorldController::index();
   });
 
-  $routes->get('/gamelist', function() {
-    HelloWorldController::gamelist();
+  $routes->get('/games', function() {
+    GameController::index();
   });
 
-  $routes->get('/game', function() {
-    HelloWorldController::game();
+  $routes->post('/games', function() {
+    GameController::store();
+  });
+
+  $routes->get('/games/add', function() {
+    GameController::create();
+  });
+
+  $routes->get('/games/:id', function($id) {
+    GameController::game($id);
   });
 
   $routes->get('/login', function() {

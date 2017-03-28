@@ -1,5 +1,4 @@
 <?php
-
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -9,6 +8,13 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
+
+      $games = Game::all();
+      $onegame = Game::find(1);
+
+      Kint::dump($games);
+      Kint::dump($onegame);
+
       View::make('helloworld.html');
     }
 
