@@ -16,16 +16,32 @@
     GameController::create();
   });
 
-  $routes->get('/games/:id', function($id) {
+  $routes->get('/user/:id', function($id) {
     GameController::game($id);
   });
 
+  $routes->get('/games/:id/edit', function($id) {
+    GameController::edit($id);
+  });
+
+  $routes->post('/games/:id/edit', function($id) {
+    GameController::update($id);
+  });
+
+  $routes->post('/games/:id/destroy', function($id) {
+    GameController::destroy($id);
+  });
+
   $routes->get('/login', function() {
-    HelloWorldController::login();
+    UserController::login();
+  });
+
+  $routes->post('/login', function() {
+    UserController::handle_login();
   });
 
   $routes->get('/user', function() {
-    HelloWorldController::user();
+    UserController::user();
   });
 
   $routes->get('/hiekkalaatikko', function() {

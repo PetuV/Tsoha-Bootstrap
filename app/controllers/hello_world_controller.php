@@ -15,6 +15,26 @@
       Kint::dump($games);
       Kint::dump($onegame);
 
+      $errorgame = new Game(array(
+        'name' => '',
+        'dev' => 'tekijä',
+        'released' => 'joskus',
+        'genre' => 'Testi'
+      ));
+      $errors = $errorgame->errors();
+
+      Kint::dump($errors);
+
+      $flawlessgame = new Game(array(
+        'name' => 'Peli',
+        'dev' => 'tekijä',
+        'released' => '12.12.2012',
+        'genre' => 'Testi'
+      ));
+      $noerrors = $flawlessgame->errors();
+
+      Kint::dump($noerrors);
+
       View::make('helloworld.html');
     }
 

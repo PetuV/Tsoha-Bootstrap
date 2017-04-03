@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.username}} pelit</h1>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Kehittäjä</th>
+        <th>Lajityyppi</th>
+        <th>Julkaisupäivä</th>
+        <th>Arvosana</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for game in games %}
+      <tr>
+        <td><a href="{{base_path}}/user/{{game.id}}">{{game.name}}</a></td>
+        <td>{{game.dev}}</td>
+        <td>{{game.genre}}</td>
+        <td>{{game.released}}</td>
+        <td>{{game.rating}}</td>
+        {% if game.completed == false %}
+        <td>Kesken</td>
+        {% else %}
+        <td>Läpäisty</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<h1>Et ole kirjautunut sisään</h1>
+{% endif %}
+{% endblock %}

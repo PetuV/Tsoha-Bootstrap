@@ -13,7 +13,7 @@
     <tbody>
     {% for game in games %}
       <tr>
-        <td>{{game.name}}</td>
+        <td><a href="{{base_path}}/games/{{game.id}}/edit">{{game.name}}</a></td>
         <td>{{game.dev}}</td>
         <td>{{game.genre}}</td>
         <td>{{game.released}}</td>

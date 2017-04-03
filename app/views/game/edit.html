@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää peli listaan</h1>
+{% import "macros/forms.html" as forms %}
+  <h1>Muokkaa listan peliä</h1>
 
   {% if errors %}
     <div class="alert alert-danger">
@@ -12,7 +13,7 @@
     </div>
   {% endif %}
 
-  <form method="post" action="{{base_path}}/games">
+  <form method="post" action="{{base_path}}/games/{{attributes.id}}/edit">
     <div class="form-group">
       <label>Nimi</label>
       <input name="name" class="form-control" value="{{attributes.name}}" type="text">
@@ -33,8 +34,12 @@
       <input name="genre" class="form-control" value="{{attributes.genre}}" type ="text"></input>
     </div>
 
+    <input name="id" class="form-control" value="{{attributes.id}}" type ="hidden"></input>
+
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Lähetä</button>
     </div>
   </form>
+
+  {{forms.destroy_button("#{base_path}/games/#{attributes.id}/destroy")}}
 {% endblock %}

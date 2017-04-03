@@ -7,10 +7,9 @@ Yleisiä linkkejä:
 
 Sovelluksen sivut:
 * [Pelilista](https://vpetteri.users.cs.helsinki.fi/tsoha/games)
-* [Pelin esittelysivu](https://vpetteri.users.cs.helsinki.fi/tsoha/games/1)
 * [Pelin lisääminen](https://vpetteri.users.cs.helsinki.fi/tsoha/games/add)
-* [Login (stattinen)](https://vpetteri.users.cs.helsinki.fi/tsoha/login)
-* [Oma kirjasto (staattinen)](https://vpetteri.users.cs.helsinki.fi/tsoha/user)
+* [Login](https://vpetteri.users.cs.helsinki.fi/tsoha/login)
+* [Oma kirjasto (vaatii sisäänkirjautumisen)](https://vpetteri.users.cs.helsinki.fi/tsoha/user)
 
 
 

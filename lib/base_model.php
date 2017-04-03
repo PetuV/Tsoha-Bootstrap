@@ -21,9 +21,29 @@
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $errors = array_merge($errors, $this->{$validator}());
       }
 
       return $errors;
+    }
+
+    public function validate_null($string){
+      $error = '';
+      if($string == '' || $string == null){
+        $error = 'Kenttä ei saa olla tyhjä';
+      }
+
+      return $error;
+    }
+
+    public function validate_date($string){
+      $error = '';
+
+      if(strlen($string) != 10){
+        $error = 'Anna päivämäärä muodossa DD.MM.YYYY';
+      }
+
+      return $error;
     }
 
   }
