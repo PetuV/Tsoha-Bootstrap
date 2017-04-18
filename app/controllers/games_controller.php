@@ -32,18 +32,18 @@ class GameController extends BaseController{
 		if(count($errors) == 0){
 			$game->save();
 
-			Redirect::to('/games/' . $game->id, array('message' => 'Peli on lisätty listaan.'));
+			Redirect::to('/games/' . $game->id . '/edit', array('message' => 'Peli on lisätty listaan.'));
 		} else{
 		   View::make('game/add.html', array('errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 
-  public static function edit($id){
-    $game = Game::find($id);
-    View::make('game/edit.html', array('attributes' => $game));
-  }
+	public static function edit($id){
+		$game = Game::find($id);
+		View::make('game/edit.html', array('attributes' => $game));
+	}
 
-  public static function update($id){
+	public static function update($id){
 	    $params = $_POST;
 	    $attributes = array(
 	   	  'id' => $id,
@@ -59,16 +59,16 @@ class GameController extends BaseController{
 		if(count($errors) == 0){
 			$game->update();
 
-			Redirect::to('/games/' . $game->id, array('message' => 'Muokkaaminen onnistui.'));
+			Redirect::to('/games/' . $game->id . '/edit', array('message' => 'Muokkaaminen onnistui.'));
 		} else{
 		   View::make('game/edit.html', array('errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 
 	public static function destroy($id){
-    $game = new Game(array('id' => $id));
-    $game->destroy();
+	    $game = new Game(array('id' => $id));
+	    $game->destroy();
 
-    Redirect::to('/games', array('message' => 'Poistaminen onnistui.'));
-  }
+	    Redirect::to('/games', array('message' => 'Poistaminen onnistui.'));
+  	}
 }

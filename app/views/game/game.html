@@ -1,19 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
   <h1>{{game.name}}</h1>
+  <form method="post" action="{{base_path}}/user/{{game.id}}/edit">
+  <input type="hidden" value="{{game.id}}" name="game_id"/>
   <ul>
     <li>Kehittäjä: {{game.dev}}</li>
     <li>Lajityyppi: {{game.genre}}</li>
     <li>Julkaisupäivä: {{game.released}}</li>
     <li>Arvosana: 
-    <select name="rating">
-	    <option value="1">1</option>
-	    <option value="2">2</option>
-	    <option value="3">3</option>
-	    <option value="4">4</option>
-	    <option value="5">5</option>
-	    </select>
+      <select name="rating">
+      {% if game.rating == 1 %}
+  	    <option value="1" selected="selected">1</option>
+      {% else %}
+        <option value="1">1</option>
+      {% endif %}
+      {% if game.rating == 2 %}
+        <option value="2" selected="selected">2</option>
+      {% else %}
+        <option value="2">2</option>
+      {% endif %}
+      {% if game.rating == 3 %}
+        <option value="3" selected="selected">3</option>
+      {% else %}
+        <option value="3">3</option>
+      {% endif %}
+      {% if game.rating == 4 %}
+        <option value="4" selected="selected">4</option>
+      {% else %}
+        <option value="4">4</option>
+      {% endif %}
+      {% if game.rating == 5 %}
+        <option value="5" selected="selected">5</option>
+      {% else %}
+        <option value="5">5</option>
+      {% endif %}
+      </select>
   	</li>
-    <li>Läpäisty: <input type="checkbox" name="completed"/></li>
+    <li>Tila: <select name="completed">
+      {% if game.completed == 'Aloittamatta' %}
+        <option value="Aloittamatta" selected="selected">Aloittamatta</option>
+      {% else %}
+        <option value="Aloittamatta">Aloittamatta</option>
+      {% endif %}
+      {% if game.completed == 'Kesken' %}
+        <option value="Kesken" selected="selected">Kesken</option>
+      {% else %}
+        <option value="Kesken">Kesken</option>
+      {% endif %}
+      {% if game.completed == 'Läpäisty' %}
+        <option value="Läpäisty" selected="selected">Läpäisty</option>
+      {% else %}
+        <option value="Läpäisty">Läpäisty</option>
+      {% endif %}
+      </select>
+    </li>
   </ul>
+  <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+  </form>
+
+  {{forms.destroy_button("#{base_path}/user/#{game.id}/destroy")}}
 {% endblock %}

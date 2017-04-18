@@ -8,6 +8,7 @@
         <th>Kehittäjä</th>
         <th>Lajityyppi</th>
         <th>Julkaisupäivä</th>
+        <th>nabbula</th>
       </tr>
     </thead>
     <tbody>
@@ -17,8 +18,12 @@
         <td>{{game.dev}}</td>
         <td>{{game.genre}}</td>
         <td>{{game.released}}</td>
+        <td><a href="{{base_path}}/games/{{game.id}}/put" class="btn btn-primary">Lisää peli kirjastoon</a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  <p>
+    <a href="{{base_path}}/games/add" class="btn btn-primary btn-lg">Lisää peli listaan</a>
+  </p>
 {% endblock %}

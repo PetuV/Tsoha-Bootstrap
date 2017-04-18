@@ -70,7 +70,7 @@ class Game extends BaseModel{
   public static function findByUserAndId($user_id, $game_id){
     $query = DB::connection()->prepare('SELECT Game.id, Game.name, Game.dev, Game.released, Game.genre, PlayerGame.rating, PlayerGame.completed FROM Game INNER JOIN PlayerGame ON Game.id = PlayerGame.game_id WHERE PlayerGame.player_id = :user_id AND PlayerGame.game_id = :game_id LIMIT 1');
     $query->execute(array('user_id' => $user_id, 'game_id' => $game_id));
-    $rows = $query->fetchAll();
+    $row = $query->fetch();
     $games = array();
 
     if($row){

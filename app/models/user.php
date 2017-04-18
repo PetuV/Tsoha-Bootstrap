@@ -43,4 +43,25 @@ class User extends BaseModel{
     return null;
   }
 
+  public function putInLibrary($game_id){
+    $query = DB::connection()->prepare('INSERT INTO PlayerGame (player_id, game_id, rating, completed) VALUES (:playerid, :gameid, 0, FALSE) RETURNING player_id');
+    $query->execute(array('playerid' => $this->id, 'gameid' => $game_id));
+    //$row = $query->fetch();
+    //$this->id = $row['id'];
+  }
+
+  public function updateGame($game_id, $rating, $completed){
+    $query = DB::connection()->prepare('UPDATE PlayerGame SET rating = :rating, completed = :completed WHERE player_id = :player_id AND game_id = :game_id');
+    $query->execute(array('player_id' => $this->id, 'game_id' => $game_id, 'rating' => $rating, 'completed' => $completed));
+    //$row = $query->fetch();
+    //$this->id = $row['id'];
+  }
+
+  public function destroyGame($game_id){
+    $query = DB::connection()->prepare('DELETE FROM PlayerGame WHERE player_id = :player_id AND game_id = :game_id');
+    $query->execute(array('player_id' => $this->id, 'game_id' => $game_id));
+    //$row = $query->fetch();
+    //$this->id = $row['id'];
+  }
+
 }

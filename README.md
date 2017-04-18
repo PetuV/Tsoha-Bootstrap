@@ -11,7 +11,12 @@ Sovelluksen sivut:
 * [Login](https://vpetteri.users.cs.helsinki.fi/tsoha/login)
 * [Oma kirjasto (vaatii sisäänkirjautumisen)](https://vpetteri.users.cs.helsinki.fi/tsoha/user)
 
+Valmiit käyttäjätunnukset:
+* Käyttäjätunnus: Testimies
+* Salasana: salasana
 
+* Käyttäjätunnus: Testiäijä
+* Salasana: salasana
 
 ## Työn aihe
 

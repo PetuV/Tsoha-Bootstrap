@@ -21,11 +21,7 @@
         <td>{{game.genre}}</td>
         <td>{{game.released}}</td>
         <td>{{game.rating}}</td>
-        {% if game.completed == false %}
-        <td>Kesken</td>
-        {% else %}
-        <td>Läpäisty</td>
-        {% endif %}
+        <td>{{game.completed}}</td>
       </tr>
       {% endfor %}
     </tbody>

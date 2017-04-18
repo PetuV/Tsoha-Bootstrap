@@ -15,10 +15,10 @@ CREATE TABLE Game(
 );
 
 CREATE TABLE PlayerGame(
-	player_id INTEGER REFERENCES Player(id), 
-	game_id INTEGER REFERENCES Game(id), 
+	player_id INTEGER REFERENCES Player(id) ON DELETE CASCADE, 
+	game_id INTEGER REFERENCES Game(id) ON DELETE CASCADE, 
 	rating INTEGER, 
-	completed boolean
+	completed varchar(50)
 );
 
 CREATE TABLE Request(
