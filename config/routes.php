@@ -24,6 +24,22 @@
     GameController::create();
   });
 
+  $routes->get('/user/edit', 'check_logged_in', function() {
+    UserController::edit($_SESSION['user']);
+  });
+
+  $routes->post('/user/destroy', 'check_logged_in', function() {
+    UserController::destroy($_SESSION['user']);
+  });
+
+  $routes->post('/user/editUsername', 'check_logged_in', function() {
+    UserController::editUsername();
+  });
+
+  $routes->post('/user/editPassword', 'check_logged_in', function() {
+    UserController::editPassword();
+  });
+
   $routes->get('/user/:id', 'check_logged_in', function($id) {
     UserController::game($id);
   });
@@ -62,6 +78,10 @@
 
   $routes->post('/logout', function(){
     UserController::logout();
+  });
+
+  $routes->post('/register', function() {
+    UserController::registerUser();
   });
 
   $routes->get('/user', 'check_logged_in', function() {

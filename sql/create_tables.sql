@@ -20,12 +20,3 @@ CREATE TABLE PlayerGame(
 	rating INTEGER, 
 	completed varchar(50)
 );
-
-CREATE TABLE Request(
-	id SERIAL PRIMARY KEY, 
-	player INTEGER REFERENCES Player(id), 
-	name varchar(255) NOT NULL, 
-	dev varchar(50), 
-	released date, 
-	genre varchar(50)
-);

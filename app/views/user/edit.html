@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+  <h1>Muokkaa käyttäjätietoja</h1>
+
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{base_path}}/user/editUsername">
+    <div class="form-group">
+      <label>Käyttäjänimi</label>
+      <input name="username" class="form-control" value="{{attributes.username}}" type="text">
+      <input name="id" class="form-control" value="{{user_logged_in.id}}" type ="hidden"></input>
+      <button type="submit" class="btn btn-primary">Vaihda käyttäjänimi</button>
+    </div>
+  </form>
+
+  <form method="post" action="{{base_path}}/user/editPassword">
+    <div class="form-group">
+      <label>Salasana</label>
+      <input name="password" class="form-control" value="" type="password">
+      <input name="id" class="form-control" value="{{user_logged_in.id}}" type ="hidden"></input>
+      <button type="submit" class="btn btn-primary">Vaihda salasana</button>
+    </div>
+  </form>
+
+  {{forms.destroy_button("#{base_path}/user/destroy")}}
+{% endblock %}

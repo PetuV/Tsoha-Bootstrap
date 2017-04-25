@@ -60,4 +60,77 @@ class UserController extends BaseController{
 
 	    Redirect::to('/user', array('message' => 'Poistaminen onnistui.'));
   	}
+
+  	public static function registerUser(){
+	    $params = $_POST;
+	    $attributes = array(
+	      'username' => $params['username'],
+	      'password' => $params['password']
+	    );
+	    $user = new User($attributes);
+
+	    $errors = $user->errors();
+
+		if(count($errors) == 0){
+			$user->save();
+
+			Redirect::to('/login', array('message' => 'Käyttäjä lisätty onnistuneesti.'));
+		} else{
+		   Redirect::to('/login', array('errors' => $errors));
+		}
+	}
+
+	public static function edit($id){
+		$user = User::find($id);
+		View::make('user/edit.html', array('attributes' => $user));
+	}
+
+	public static function editUsername(){
+	    $params = $_POST;
+	    $attributes = array(
+	      'id' => $params['id'],
+	      'username' => $params['username'],
+	      'password' => 'irrelevant'
+	    );
+	    $user = new User($attributes);
+
+	    $errors = $user->errors();
+
+		if(count($errors) == 0){
+			$user->updateUsername();
+
+			Redirect::to('/user', array('message' => 'Käyttäjänimi vaihdettu.'));
+		} else{
+		   Redirect::to('/user/edit', array('errors' => $errors));
+		}
+	}
+
+	public static function editPassword(){
+	    $params = $_POST;
+	    $attributes = array(
+	      'id' => $params['id'],
+	      'username' => 'irrelevant',
+	      'password' => $params['password']
+	    );
+	    $user = new User($attributes);
+
+	    $errors = $user->errors();
+
+		if(count($errors) == 0){
+			$user->updatePassword();
+
+			Redirect::to('/user', array('message' => 'Salasana vaihdettu.'));
+		} else{
+		   Redirect::to('/user/edit', array('errors' => $errors));
+		}
+	}
+
+	public static function destroy($id){
+	    $user = new User(array('id' => $id));
+	    $user->destroy();
+
+	    $_SESSION['user'] = null;
+
+	    Redirect::to('/login', array('message' => 'Jäämme kaipaamaan sinua.'));
+  	}
 }
