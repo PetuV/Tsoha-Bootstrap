@@ -39,10 +39,17 @@ class UserController extends BaseController{
 
 	public static function put($game_id) {
 	  	$user = User::find($_SESSION['user']);
+	  	$game = Game::findByUserAndId($user->id, $game_id);
 
-	  	$user-> putInLibrary($game_id);
+	  	if($game == null) {
+	  		$user-> putInLibrary($game_id);
 
-		Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Peli lisätty kirjastoon.'));
+			Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Peli lisätty kirjastoon.'));
+	  	} else{
+			Redirect::to('/games', array('error' => 'Tämä peli on jo kirjastossasi.'));
+		}
+
+	  	
 	}
 
 	public static function game($game_id) {
@@ -74,16 +81,21 @@ class UserController extends BaseController{
 	      'username' => $params['username'],
 	      'password' => $params['password']
 	    );
-	    $user = new User($attributes);
 
-	    $errors = $user->errors();
+	    if(User::findByUsername($attributes['username'])) {
+	    	Redirect::to('/login', array('error' => 'Tämä käyttäjänimi on jo käytössä.'));
+	    } else {
+		    $user = new User($attributes);
 
-		if(count($errors) == 0){
-			$user->save();
+		    $errors = $user->errors();
 
-			Redirect::to('/login', array('message' => 'Käyttäjä lisätty onnistuneesti.'));
-		} else{
-		   Redirect::to('/login', array('errors' => $errors));
+			if(count($errors) == 0){
+				$user->save();
+
+				Redirect::to('/login', array('message' => 'Käyttäjä lisätty onnistuneesti.'));
+			} else{
+			   Redirect::to('/login', array('error' => $errors));
+			}
 		}
 	}
 
@@ -108,7 +120,7 @@ class UserController extends BaseController{
 
 			Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Käyttäjänimi vaihdettu.'));
 		} else{
-		   Redirect::to('/user/edit', array('errors' => $errors));
+		   Redirect::to('/user/edit', array('error' => $errors));
 		}
 	}
 
@@ -128,7 +140,7 @@ class UserController extends BaseController{
 
 			Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Salasana vaihdettu.'));
 		} else{
-		   Redirect::to('/user/edit', array('errors' => $errors));
+		   Redirect::to('/user/edit', array('error' => $errors));
 		}
 	}
 

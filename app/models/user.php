@@ -59,6 +59,24 @@ class User extends BaseModel{
     return null;
   }
 
+  public static function findByUsername($username){
+    $query = DB::connection()->prepare('SELECT * FROM Player WHERE username = :username LIMIT 1');
+    $query->execute(array('username' => $username));
+    $row = $query->fetch();
+
+    if($row){
+      $user = new User(array(
+        'id' => $row['id'],
+        'username' => $row['username'],
+        'password' => $row['password']
+      ));
+
+      return $user;
+    }
+
+    return null;
+  }
+
   public function save(){
     $query = DB::connection()->prepare('INSERT INTO Player (username, password) VALUES (:username, :password) RETURNING id');
     $query->execute(array('username' => $this->username, 'password' => $this->password));
@@ -80,8 +98,8 @@ class User extends BaseModel{
   }
 
   public function putInLibrary($game_id){
-    $query = DB::connection()->prepare('INSERT INTO PlayerGame (player_id, game_id, rating, completed) VALUES (:playerid, :gameid, 3, Aloittamatta) RETURNING player_id');
-    $query->execute(array('playerid' => $this->id, 'gameid' => $game_id));
+    $query = DB::connection()->prepare('INSERT INTO PlayerGame (player_id, game_id, rating, completed) VALUES (:playerid, :gameid, 3, :completed) RETURNING player_id');
+    $query->execute(array('playerid' => $this->id, 'gameid' => $game_id, 'completed' => 'Aloittamatta'));
   }
 
   public function updateGame($game_id, $rating, $completed){
