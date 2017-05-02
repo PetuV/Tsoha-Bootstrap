@@ -99,15 +99,11 @@ class Game extends BaseModel{
   public function update(){
     $query = DB::connection()->prepare('UPDATE Game SET name = :name, dev = :dev, released = :released, genre = :genre WHERE id = :id');
     $query->execute(array('name' => $this->name, 'dev' => $this->dev, 'released' => $this->released, 'genre' => $this->genre, 'id' => $this->id));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function destroy(){
     $query = DB::connection()->prepare('DELETE FROM Game WHERE id = :id');
     $query->execute(array('id' => $this->id));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function validate_name(){
@@ -116,7 +112,6 @@ class Game extends BaseModel{
     if (strlen($error) > 0) {
       $errors[] = 'Pelillä on oltava nimi.';
     }
-    //$errors[] = $this->validate_null($this->name);
     return $errors;
   }
 

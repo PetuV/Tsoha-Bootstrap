@@ -91,7 +91,3 @@
   $routes->get('/users', function() {
     UserController::index();
   });
-
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });

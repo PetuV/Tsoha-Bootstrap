@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Lista järjestelmän tunnistamista peleistä</h1>
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Kehittäjä</th>
-        <th>Lajityyppi</th>
-        <th>Julkaisupäivä</th>
-        {% if user_logged_in %}
-        <th></th>
-        {% endif %}
-      </tr>
-    </thead>
-    <tbody>
-    {% for game in games %}
-      <tr>
-        <td><a href="{{base_path}}/games/{{game.id}}/edit">{{game.name}}</a></td>
-        <td>{{game.dev}}</td>
-        <td>{{game.genre}}</td>
-        <td>{{game.released}}</td>
-        {% if user_logged_in %}
-        <td><a href="{{base_path}}/games/{{game.id}}/put" class="btn btn-primary">Lisää peli kirjastoon</a></td>
-        {% endif %}
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% if user_logged_in %}
-  <p>
-    <a href="{{base_path}}/games/add" class="btn btn-primary btn-lg">Lisää peli listaan</a>
-  </p>
-  {% endif %}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nimi</th>
+      <th>Kehittäjä</th>
+      <th>Lajityyppi</th>
+      <th>Julkaisupäivä</th>
+      {% if user_logged_in %}
+      <th></th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for game in games %}
+    <tr>
+      <td><a href="{{base_path}}/games/{{game.id}}/edit">{{game.name}}</a></td>
+      <td>{{game.dev}}</td>
+      <td>{{game.genre}}</td>
+      <td>{{game.released}}</td>
+      {% if user_logged_in %}
+      <td><a href="{{base_path}}/games/{{game.id}}/put" class="btn btn-primary">Lisää peli kirjastoon</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if user_logged_in %}
+<p>
+  <a href="{{base_path}}/games/add" class="btn btn-primary btn-lg">Lisää peli listaan</a>
+</p>
+{% endif %}
 {% endblock %}

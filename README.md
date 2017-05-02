@@ -5,17 +5,14 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](https://vpetteri.users.cs.helsinki.fi/tsoha)
 * [Linkki dokumentaatiooni](https://www.github.com/PetuV/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
-Sovelluksen sivut:
-* [Pelilista](https://vpetteri.users.cs.helsinki.fi/tsoha/games)
-* [Pelin lisääminen](https://vpetteri.users.cs.helsinki.fi/tsoha/games/add)
+Sovelluksen sivuja:
 * [Login](https://vpetteri.users.cs.helsinki.fi/tsoha/login)
-* [Oma kirjasto (vaatii sisäänkirjautumisen)](https://vpetteri.users.cs.helsinki.fi/tsoha/user)
+* [Pelilista](https://vpetteri.users.cs.helsinki.fi/tsoha/games)
+* [Lista käyttäjistä](https://vpetteri.users.cs.helsinki.fi/tsoha/users)
+* Loput sivut vaativat sisäänkirjautumisen
 
 Valmiit käyttäjätunnukset:
 * Käyttäjätunnus: Testimies
-* Salasana: salasana
-
-* Käyttäjätunnus: Testiäijä
 * Salasana: salasana
 
 ## Työn aihe
