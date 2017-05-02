@@ -40,15 +40,15 @@
     UserController::editPassword();
   });
 
-  $routes->get('/user/:id', 'check_logged_in', function($id) {
+  $routes->get('/user/game/:id', 'check_logged_in', function($id) {
     UserController::game($id);
   });
 
-  $routes->post('/user/:id/edit', 'check_logged_in', function($id) {
+  $routes->post('/user/game/:id/edit', 'check_logged_in', function($id) {
     UserController::updateGame($id);
   });
 
-  $routes->post('/user/:id/destroy', 'check_logged_in', function($id) {
+  $routes->post('/user/game/:id/destroy', 'check_logged_in', function($id) {
     UserController::destroyGame($id);
   });
 
@@ -84,8 +84,12 @@
     UserController::registerUser();
   });
 
-  $routes->get('/user', 'check_logged_in', function() {
-    UserController::user();
+  $routes->get('/user/:id', function($id) {
+    UserController::user($id);
+  });
+
+  $routes->get('/users', function() {
+    UserController::index();
   });
 
   $routes->get('/hiekkalaatikko', function() {

@@ -1,33 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user_logged_in %}
-<h1>Käyttäjän {{user_logged_in.username}} pelit</h1>
-<p><a href="{{base_path}}/user/edit">Paska placeholder edit linkki</a></p>
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Kehittäjä</th>
-        <th>Lajityyppi</th>
-        <th>Julkaisupäivä</th>
-        <th>Arvosana</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for game in games %}
-      <tr>
-        <td><a href="{{base_path}}/user/{{game.id}}">{{game.name}}</a></td>
-        <td>{{game.dev}}</td>
-        <td>{{game.genre}}</td>
-        <td>{{game.released}}</td>
-        <td>{{game.rating}}</td>
-        <td>{{game.completed}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-<h1>Et ole kirjautunut sisään</h1>
+<h1>Käyttäjän {{user.username}} pelit</h1>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nimi</th>
+      <th>Kehittäjä</th>
+      <th>Lajityyppi</th>
+      <th>Julkaisupäivä</th>
+      <th>Arvosana</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in games %}
+    <tr>
+      <td><a href="{{base_path}}/user/game/{{game.id}}">{{game.name}}</a></td>
+      <td>{{game.dev}}</td>
+      <td>{{game.genre}}</td>
+      <td>{{game.released}}</td>
+      <td>{{game.rating}}</td>
+      <td>{{game.completed}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if user_logged_in.id == user.id %}
+<p><a href="{{base_path}}/user/edit">Muuta käyttäjätietoja</a></p>
 {% endif %}
 {% endblock %}

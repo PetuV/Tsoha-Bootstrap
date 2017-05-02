@@ -15,7 +15,7 @@ class UserController extends BaseController{
 	    }else{
 	      $_SESSION['user'] = $user->id;
 
-	      Redirect::to('/user', array('message' => 'Tervetuloa, ' . $user->username . '.'));
+	      Redirect::to('/user/' . $user->id, array('message' => 'Tervetuloa, ' . $user->username . '.'));
 	    }
 	}
 
@@ -24,10 +24,17 @@ class UserController extends BaseController{
 	    Redirect::to('/login', array('message' => 'Sinut on kirjattu ulos.'));
 	}
 
-	public static function user() {
-	  	$games = Game::findByUser($_SESSION['user']);
+	public static function user($id) {
+		$user = User::find($id);
+	  	$games = Game::findByUser($id);
 
-		View::make('user/user.html', array('games' => $games));
+		View::make('user/user.html', array('user' => $user, 'games' => $games));
+	}
+
+	public static function index(){
+		$users = User::all();
+
+		View::make('user/userlist.html', array('users' => $users));
 	}
 
 	public static function put($game_id) {
@@ -35,7 +42,7 @@ class UserController extends BaseController{
 
 	  	$user-> putInLibrary($game_id);
 
-		Redirect::to('/user', array('message' => 'Peli lisätty kirjastoon.'));
+		Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Peli lisätty kirjastoon.'));
 	}
 
 	public static function game($game_id) {
@@ -51,14 +58,14 @@ class UserController extends BaseController{
 
 	    $user-> updateGame($params['game_id'], $params['rating'], $params['completed']);
 
-		Redirect::to('/user', array('message' => 'Pelin tiedot päivitetty.'));
+		Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Pelin tiedot päivitetty.'));
 	}
 
 	public static function destroyGame($game_id){
 	    $user = User::find($_SESSION['user']);
 	    $user->destroyGame($game_id);
 
-	    Redirect::to('/user', array('message' => 'Poistaminen onnistui.'));
+	    Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Poistaminen onnistui.'));
   	}
 
   	public static function registerUser(){
@@ -99,7 +106,7 @@ class UserController extends BaseController{
 		if(count($errors) == 0){
 			$user->updateUsername();
 
-			Redirect::to('/user', array('message' => 'Käyttäjänimi vaihdettu.'));
+			Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Käyttäjänimi vaihdettu.'));
 		} else{
 		   Redirect::to('/user/edit', array('errors' => $errors));
 		}
@@ -119,7 +126,7 @@ class UserController extends BaseController{
 		if(count($errors) == 0){
 			$user->updatePassword();
 
-			Redirect::to('/user', array('message' => 'Salasana vaihdettu.'));
+			Redirect::to('/user/' . $_SESSION['user'], array('message' => 'Salasana vaihdettu.'));
 		} else{
 		   Redirect::to('/user/edit', array('errors' => $errors));
 		}

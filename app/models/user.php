@@ -1,6 +1,6 @@
 <?php
 class User extends BaseModel{
-	public $id, $username, $password, $isadmin;
+	public $id, $username, $password;
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -15,8 +15,7 @@ class User extends BaseModel{
 			$user = new User(array(
 	        'id' => $row['id'],
 	        'username' => $row['username'],
-	        'password' => $row['password'],
-	        'isadmin' => $row['isadmin']
+	        'password' => $row['password']
 	      	));
 
 	      	return $user;
@@ -24,6 +23,23 @@ class User extends BaseModel{
 			return null;
 		}
 	}
+
+  public static function all(){
+    $query = DB::connection()->prepare('SELECT * FROM Player');
+    $query->execute();
+    $rows = $query->fetchAll();
+    $games = array();
+
+    foreach($rows as $row){
+      $users[] = new User(array(
+        'id' => $row['id'],
+        'username' => $row['username'],
+        'password' => $row['password']
+      ));
+    }
+
+    return $users;
+  }
 
 	public static function find($id){
     $query = DB::connection()->prepare('SELECT * FROM Player WHERE id = :id LIMIT 1');
@@ -34,8 +50,7 @@ class User extends BaseModel{
       $user = new User(array(
         'id' => $row['id'],
         'username' => $row['username'],
-        'password' => $row['password'],
-	     'isadmin' => $row['isadmin']
+        'password' => $row['password']
       ));
 
       return $user;
@@ -47,8 +62,6 @@ class User extends BaseModel{
   public function save(){
     $query = DB::connection()->prepare('INSERT INTO Player (username, password) VALUES (:username, :password) RETURNING id');
     $query->execute(array('username' => $this->username, 'password' => $this->password));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function updateUsername(){
@@ -67,24 +80,18 @@ class User extends BaseModel{
   }
 
   public function putInLibrary($game_id){
-    $query = DB::connection()->prepare('INSERT INTO PlayerGame (player_id, game_id, rating, completed) VALUES (:playerid, :gameid, 0, FALSE) RETURNING player_id');
+    $query = DB::connection()->prepare('INSERT INTO PlayerGame (player_id, game_id, rating, completed) VALUES (:playerid, :gameid, 3, Aloittamatta) RETURNING player_id');
     $query->execute(array('playerid' => $this->id, 'gameid' => $game_id));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function updateGame($game_id, $rating, $completed){
     $query = DB::connection()->prepare('UPDATE PlayerGame SET rating = :rating, completed = :completed WHERE player_id = :player_id AND game_id = :game_id');
     $query->execute(array('player_id' => $this->id, 'game_id' => $game_id, 'rating' => $rating, 'completed' => $completed));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function destroyGame($game_id){
     $query = DB::connection()->prepare('DELETE FROM PlayerGame WHERE player_id = :player_id AND game_id = :game_id');
     $query->execute(array('player_id' => $this->id, 'game_id' => $game_id));
-    //$row = $query->fetch();
-    //$this->id = $row['id'];
   }
 
   public function validate_username(){

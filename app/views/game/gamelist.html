@@ -8,7 +8,9 @@
         <th>Kehittäjä</th>
         <th>Lajityyppi</th>
         <th>Julkaisupäivä</th>
-        <th>nabbula</th>
+        {% if user_logged_in %}
+        <th></th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -18,12 +20,16 @@
         <td>{{game.dev}}</td>
         <td>{{game.genre}}</td>
         <td>{{game.released}}</td>
+        {% if user_logged_in %}
         <td><a href="{{base_path}}/games/{{game.id}}/put" class="btn btn-primary">Lisää peli kirjastoon</a></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% if user_logged_in %}
   <p>
     <a href="{{base_path}}/games/add" class="btn btn-primary btn-lg">Lisää peli listaan</a>
   </p>
+  {% endif %}
 {% endblock %}
